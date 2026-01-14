@@ -43,7 +43,16 @@ jobs:
         echo "EMAIL_USERNAME=${{ secrets.EMAIL_USER }}" >> .env
         echo "EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}" >> .env
         echo "EMAIL_FROM=${{ secrets.EMAIL_FROM }}" >> .env
+        echo "EMAIL_TO_ADDRESSES=${{ secrets.EMAIL_TO }}" >> .env
         echo "EMAIL_USE_TLS=true" >> .env
+        
+        # DEBUG: 检查邮件配置是否注入成功
+        echo "=== DEBUG: Email Secrets Check ==="
+        echo "EMAIL_HOST: ${{ secrets.EMAIL_HOST }}"
+        echo "EMAIL_PORT: ${{ secrets.EMAIL_PORT }}"
+        echo "EMAIL_USER: ${{ secrets.EMAIL_USER }}"
+        echo "EMAIL_FROM: ${{ secrets.EMAIL_FROM }}"
+        echo "=================================="
         
         # 创建 config/cookies.txt (用于 X 登录)
         mkdir -p config

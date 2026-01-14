@@ -145,7 +145,8 @@ class Config:
             "username": os.environ.get("EMAIL_USERNAME", config.get("username", "")),
             "password": os.environ.get("EMAIL_PASSWORD", config.get("password", "")),
             "from_address": os.environ.get("EMAIL_FROM", config.get("from_address", "")),
-            "to_addresses": config.get("to_addresses", [])
+            "from_address": os.environ.get("EMAIL_FROM", config.get("from_address", "")),
+            "to_addresses": [x.strip() for x in os.environ.get("EMAIL_TO_ADDRESSES", "").split(",") if x.strip()] if os.environ.get("EMAIL_TO_ADDRESSES") else config.get("to_addresses", [])
         }
 
 
