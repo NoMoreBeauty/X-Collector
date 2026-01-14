@@ -58,7 +58,7 @@ class EmailNotifier:
             # 创建邮件
             msg = MIMEMultipart()
             # 设置显示名称: "X-Daily-Report <email@address.com>"
-            sender = f"X-Daily-Report <{self.config.from_address}>"
+            sender = f"祝乙留环球时报 <{self.config.from_address}>"
             msg["From"] = sender
             msg["To"] = ", ".join(self.config.to_addresses)
             msg["Subject"] = subject
