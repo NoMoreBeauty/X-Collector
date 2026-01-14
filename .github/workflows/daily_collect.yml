@@ -45,6 +45,11 @@ jobs:
         echo "auth_token=${{ secrets.X_AUTH_TOKEN }}" >> config/cookies.txt
         echo "ct0=${{ secrets.X_CT0 }}" >> config/cookies.txt
         
+        # DEBUG: 检查文件内容 (Secrets 会被 GitHub 自动 masking，但可以看到变量名)
+        echo "=== DEBUG: Cookies File Content ==="
+        cat config/cookies.txt
+        echo "==================================="
+        
         # 确保 config.yaml 存在
         if [ ! -f config/config.yaml ]; then
           cp config/config.example.yaml config/config.yaml || touch config/config.yaml

@@ -56,12 +56,21 @@ class EmailNotifier:
         
         try:
             # 创建邮件
+            # 创建邮件
             msg = MIMEMultipart()
+            
+            # 使用 Header 编码非 ASCII字符
+            from email.header import Header
+            
             # 设置显示名称: "X-Daily-Report <email@address.com>"
-            sender = f"祝乙留环球时报 <{self.config.from_address}>"
+            # 注意: Header 只编码显示名称部分，不编码邮箱地址
+            display_name = "祝乙留环球时报"
+            encoded_name = Header(display_name, 'utf-8').encode()
+            sender = f"{encoded_name} <{self.config.from_address}>"
+            
             msg["From"] = sender
             msg["To"] = ", ".join(self.config.to_addresses)
-            msg["Subject"] = subject
+            msg["Subject"] = Header(subject, 'utf-8')
             
             # 添加正文
             msg.attach(MIMEText(body, "html", "utf-8"))
