@@ -34,6 +34,9 @@ jobs:
     - name: Create config files
       run: |
         # 创建 .env 文件 (用于 API Key 和 邮件配置)
+        echo "DASHSCOPE_API_KEY=${{ secrets.DASHSCOPE_API_KEY }}" >> .env
+        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+        echo "ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}" >> .env
         echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> .env
         echo "EMAIL_SMTP_HOST=${{ secrets.EMAIL_HOST }}" >> .env
         echo "EMAIL_SMTP_PORT=${{ secrets.EMAIL_PORT }}" >> .env
