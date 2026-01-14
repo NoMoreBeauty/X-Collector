@@ -61,13 +61,44 @@ jobs:
         # 确保 Python 输出不被缓存
         PYTHONUNBUFFERED: 1
         
-    # 6. (可选) 将报告提交回仓库
-    # 如果你想在 GitHub 上查看历史报告，保留此步骤
-    - name: Commit Report
+    # 6. 将报告推送到 reports 分支
+    - name: Push Report to Branch
       run: |
+        # 配置 Git
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add reports/
-        # 如果有变动则提交，无变动则跳过
-        git commit -m "📝 Add daily report [skip ci]" || echo "No changes to commit"
-        git push
+        
+        # 获取最新生成的报告
+        REPORT_FILE=$(ls reports/report_*.md | head -n 1)
+        if [ -z "$REPORT_FILE" ]; then
+          echo "No report file found!"
+          exit 0
+        fi
+        
+        # 提取文件名和日期
+        FILENAME=$(basename "$REPORT_FILE")
+        # 简单的日期提取: report_20260114_... -> 2026/01/14
+        DATE_PART=$(echo $FILENAME | cut -d'_' -f2)
+        YEAR=${DATE_PART:0:4}
+        MONTH=${DATE_PART:4:2}
+        DAY=${DATE_PART:6:2}
+        
+        # 将报告暂存到临时目录
+        mkdir -p /tmp/x_reports
+        cp "$REPORT_FILE" "/tmp/x_reports/$FILENAME"
+        
+        # 切换到 reports 分支
+        git fetch origin reports
+        git checkout reports
+        
+        # 创建日期层级目录: 2026/01/14/
+        TARGET_DIR="$YEAR/$MONTH/$DAY"
+        mkdir -p "$TARGET_DIR"
+        
+        # 移动报告并更新 README (可选: 更新索引)
+        mv "/tmp/x_reports/$FILENAME" "$TARGET_DIR/"
+        
+        # 提交
+        git add "$TARGET_DIR/"
+        git commit -m "📝 Add report for $YEAR-$MONTH-$DAY" || echo "No changes to commit"
+        git push origin reports
