@@ -10,6 +10,8 @@ on:
 jobs:
   collect_and_report:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
     # 1. 检出代码
