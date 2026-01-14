@@ -1,0 +1,65 @@
+# X Information Collector 配置文件
+
+# AI 服务配置
+ai:
+  # 供应商选择: dashscope, openai, anthropic, google
+  provider: dashscope
+  
+  # DashScope (阿里云) - API Key 在 .env 中配置
+  dashscope:
+    vision_model: qwen-vl-max
+    text_model: qwen-plus
+  
+  # OpenAI
+  openai:
+    vision_model: gpt-4-vision-preview
+    text_model: gpt-4-turbo-preview
+  
+  # Anthropic
+  anthropic:
+    vision_model: claude-3-sonnet-20240229
+    text_model: claude-3-sonnet-20240229
+  
+  # Google
+  google:
+    vision_model: gemini-1.5-pro
+    text_model: gemini-1.5-pro
+
+# 采集配置
+collector:
+  # 每个用户加载的最大推文数
+  max_tweets_per_user: 20
+  # 页面滚动次数
+  scroll_times: 3
+  # 滚动间隔(秒)
+  scroll_delay: 2
+  # 截图保存天数
+  screenshot_retention_days: 7
+  # 无头模式 (true=后台运行, false=显示浏览器窗口)
+  headless: true
+
+# 调度配置
+scheduler:
+  # 每日采集时间 (24小时制)
+  daily_collect_time: "08:00"
+  # 时区
+  timezone: Asia/Shanghai
+
+# 邮件通知配置 (敏感信息在 .env 中配置)
+email:
+  # 是否启用邮件通知
+  enabled: false
+  # 收件人邮箱列表
+  to_addresses:
+    - your-email@example.com
+
+# 存储配置
+storage:
+  database_path: data/tweets.db
+  screenshots_path: data/screenshots
+  reports_path: reports
+
+# 日志配置
+logging:
+  level: INFO
+  file: logs/collector.log

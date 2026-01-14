@@ -1,0 +1,73 @@
+name: Daily X Info Collection
+
+# 每天北京时间早上 8:00 运行 (UTC 0:00)
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  # 允许手动触发
+  workflow_dispatch:
+
+jobs:
+  collect_and_report:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. 检出代码
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    # 2. 设置 Python 环境
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    # 3. 安装依赖
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        
+    # 4. 生成配置文件 (从 Secrets 注入)
+    - name: Create config files
+      run: |
+        # 创建 .env 文件 (用于 API Key 和 邮件配置)
+        echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> .env
+        echo "EMAIL_SMTP_HOST=${{ secrets.EMAIL_HOST }}" >> .env
+        echo "EMAIL_SMTP_PORT=${{ secrets.EMAIL_PORT }}" >> .env
+        echo "EMAIL_USERNAME=${{ secrets.EMAIL_USER }}" >> .env
+        echo "EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}" >> .env
+        echo "EMAIL_FROM=${{ secrets.EMAIL_FROM }}" >> .env
+        echo "EMAIL_USE_TLS=true" >> .env
+        
+        # 创建 config/cookies.txt (用于 X 登录)
+        mkdir -p config
+        echo "auth_token=${{ secrets.X_AUTH_TOKEN }}" >> config/cookies.txt
+        echo "ct0=${{ secrets.X_CT0 }}" >> config/cookies.txt
+        
+        # 确保 config.yaml 存在
+        if [ ! -f config/config.yaml ]; then
+          cp config/config.example.yaml config/config.yaml || touch config/config.yaml
+        fi
+        
+    # 5. 运行采集任务
+    - name: Run Collector
+      run: |
+        # 运行主程序: 采集 -> 生成报告 -> 发送邮件
+        # --report: 生成报告
+        # --notify: 发送邮件 (强制开启)
+        python main.py collect --report --notify
+      env:
+        # 确保 Python 输出不被缓存
+        PYTHONUNBUFFERED: 1
+        
+    # 6. (可选) 将报告提交回仓库
+    # 如果你想在 GitHub 上查看历史报告，保留此步骤
+    - name: Commit Report
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add reports/
+        # 如果有变动则提交，无变动则跳过
+        git commit -m "📝 Add daily report [skip ci]" || echo "No changes to commit"
+        git push

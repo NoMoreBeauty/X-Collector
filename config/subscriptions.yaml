@@ -1,0 +1,69 @@
+# X 用户订阅列表
+# 这些是真实的 X (Twitter) 账号 handle
+
+users:
+  # ===== AI 公司 CEO 和创始人 =====
+  - handle: elonmusk
+    name: Elon Musk
+    category: tech_leader
+    priority: high
+    note: Tesla/SpaceX/xAI CEO
+    
+  - handle: sama
+    name: Sam Altman
+    category: ai_leader
+    priority: high
+    note: OpenAI CEO
+    
+  - handle: DarioAmodei
+    name: Dario Amodei
+    category: ai_leader
+    priority: high
+    note: Anthropic CEO
+    
+  - handle: demaborgs
+    name: Demis Hassabis
+    category: ai_leader
+    priority: high
+    note: Google DeepMind CEO
+
+  # ===== AI 研究员和技术领袖 =====
+  - handle: ylecun
+    name: Yann LeCun
+    category: researcher
+    priority: high
+    note: Meta AI 首席科学家, 图灵奖得主
+    
+  - handle: karpathy
+    name: Andrej Karpathy
+    category: researcher
+    priority: high
+    note: 前 Tesla AI 总监, 前 OpenAI
+    
+  - handle: gaborgs
+    name: Greg Brockman
+    category: ai_leader
+    priority: high
+    note: OpenAI 联合创始人/前总裁
+
+  # ===== 其他科技领袖 =====
+  - handle: satloghubev
+    name: Satya Nadella
+    category: tech_leader
+    priority: medium
+    note: Microsoft CEO
+
+  # 添加更多用户...
+  # - handle: username
+  #   name: Display Name
+  #   category: ai_leader / tech_leader / researcher / investor
+  #   priority: high / medium / low
+  #   note: 备注说明
+
+# 分类说明
+categories:
+  tech_leader: 科技公司领导
+  ai_leader: AI 公司/研究领导
+  researcher: AI 研究员
+  investor: 投资人
+  developer: 开发者
