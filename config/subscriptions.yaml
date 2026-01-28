@@ -53,6 +53,174 @@ users:
     priority: medium
     note: Microsoft CEO
 
+  # ===== AI / 大模型 / Infra 扩展 =====
+  - handle: IlyaSutskever
+    name: Ilya Sutskever
+    category: researcher
+    priority: medium
+    note: OpenAI 联合创始人, 代表性 AI 研究员
+
+  - handle: _rockt
+    name: Wojciech Zaremba
+    category: researcher
+    priority: medium
+    note: OpenAI 联合创始人, 强化学习/机器人
+
+  - handle: guangxuanwang
+    name: Guangxuan Wang
+    category: developer
+    priority: medium
+    note: AI infra/优化方向开发者
+
+  - handle: BingshenYin
+    name: Bingshen Yin
+    category: developer
+    priority: medium
+    note: AI infra/推理优化
+
+  - handle: AndrewYNg
+    name: Andrew Ng
+    category: researcher
+    priority: medium
+    note: AI 教学和产业化
+
+  - handle: emollick
+    name: Ethan Mollick
+    category: researcher
+    priority: medium
+    note: 研究 AI 对工作与教育的影响
+
+  # ===== 宏观 / 投资 / 商业 =====
+  - handle: Naval
+    name: Naval Ravikant
+    category: investor
+    priority: medium
+    note: 投资人, 哲学/创业/财富思考
+
+  - handle: morganhousel
+    name: Morgan Housel
+    category: investor
+    priority: medium
+    note: 《金钱心理学》作者, 财经/行为金融
+
+  - handle: howardlindzon
+    name: Howard Lindzon
+    category: investor
+    priority: medium
+    note: 早期投资人, 市场情绪与趋势
+
+  - handle: JoshWolfe
+    name: Josh Wolfe
+    category: investor
+    priority: medium
+    note: Lux Capital 合伙人, 深科创业与投资
+
+  - handle: PatrickMcGee_
+    name: Patrick McGee
+    category: tech_leader
+    priority: medium
+    note: FT 记者, 苹果/科技商业
+
+  # ===== 科技媒体 / 全球新闻视角 =====
+  - handle: Stratechery
+    name: Ben Thompson
+    category: tech_leader
+    priority: medium
+    note: 科技战略分析, 苹果/微软/AI/互联网格局
+
+  - handle: asonyan
+    name: Azeem Azhar
+    category: tech_leader
+    priority: medium
+    note: 指数科技, 政治经济与技术交叉
+
+  - handle: zerohedge
+    name: zerohedge
+    category: investor
+    priority: medium
+    note: 宏观与市场, 偶有极端观点, 把握情绪
+
+  - handle: RnaudBertrand
+    name: Renaud Bertrand
+    category: geopolitics
+    priority: medium
+    note: 地缘政治与中国/西方舆论观察
+
+  - handle: ianbremmer
+    name: Ian Bremmer
+    category: geopolitics
+    priority: medium
+    note: 政治风险, 全球局势
+
+  # ===== 科学 / 未来 / 太空 =====
+  - handle: waitbutwhy
+    name: Wait But Why
+    category: researcher
+    priority: medium
+    note: 长文作者, 写未来科技/人生/思维模式
+
+  - handle: neuromusic
+    name: Chris Olah
+    category: researcher
+    priority: medium
+    note: 可解释性研究, 深度学习安全
+
+  - handle: AstroKatie
+    name: Katie Mack
+    category: researcher
+    priority: medium
+    note: 宇宙学, 科学传播
+
+  - handle: NaturePortfolio
+    name: Nature
+    category: researcher
+    priority: medium
+    note: 自然杂志, 前沿科学新闻
+
+  # ===== 产品 / 创作者 / 思维 & 效率 =====
+  - handle: Julian
+    name: Julian Shapiro
+    category: developer
+    priority: medium
+    note: 增长/写作/思考框架
+
+  - handle: shreyas
+    name: Shreyas Doshi
+    category: developer
+    priority: medium
+    note: 前 Stripe/Twitter 产品负责人, 产品与决策
+
+  - handle: stephsmithio
+    name: Steph Smith
+    category: developer
+    priority: medium
+    note: 远程工作/内容创作者/增长
+
+  - handle: AlexHormozi
+    name: Alex Hormozi
+    category: entrepreneur
+    priority: medium
+    note: 商业执行/成交与增长, 偏实战风格
+
+  # ===== 偏中国/亚洲视角（英文为主） =====
+  - handle: zhanglifan
+    name: Lifan Zhang
+    category: geopolitics
+    priority: medium
+    note: 中美科技与政策观察
+
+  - handle: zhihuishu
+    name: Zhiwu Chen
+    category: investor
+    priority: medium
+    note: 经济学视角, 中国与全球经济
+
+  - handle: tgmacro
+    name: TG Macro
+    category: investor
+    priority: medium
+    note: 对宏观与中国有较多关注
+
   # 添加更多用户...
   # - handle: username
   #   name: Display Name
