@@ -1,237 +1,204 @@
-# X 用户订阅列表
+# X 用户订阅列表（AI 圈专用）
 # 这些是真实的 X (Twitter) 账号 handle
 
 users:
-  # ===== AI 公司 CEO 和创始人 =====
-  - handle: elonmusk
-    name: Elon Musk
-    category: tech_leader
+  # ===== 官方账号 / 头部 AI 公司与实验室 =====
+  - handle: OpenAI
+    name: OpenAI
+    category: ai_company
     priority: high
-    note: Tesla/SpaceX/xAI CEO
-    
+    note: 官方账号
+
+  - handle: OpenAIDevs
+    name: OpenAI Developers
+    category: ai_company
+    priority: high
+    note: 平台/API/开发者更新
+
+  - handle: AnthropicAI
+    name: Anthropic
+    category: ai_company
+    priority: high
+    note: Claude/研究与产品更新
+
+  - handle: GoogleDeepMind
+    name: Google DeepMind
+    category: ai_lab
+    priority: high
+    note: Gemini/研究发布
+
+  - handle: AIatMeta
+    name: AI at Meta
+    category: ai_lab
+    priority: high
+    note: Llama/开源与研究
+
+  - handle: MistralAI
+    name: Mistral AI
+    category: ai_company
+    priority: high
+    note: 模型与产品更新
+
+  - handle: cohere
+    name: Cohere
+    category: ai_company
+    priority: medium
+    note: 企业级 LLM/工具链
+
+  - handle: huggingface
+    name: Hugging Face
+    category: ai_platform
+    priority: high
+    note: 模型生态/开源工具
+
+  - handle: StabilityAI
+    name: Stability AI
+    category: ai_company
+    priority: medium
+    note: Stable Diffusion/多模态产品
+
+  - handle: perplexity_ai
+    name: Perplexity
+    category: ai_company
+    priority: medium
+    note: AI 搜索与产品更新
+
+  - handle: scale_AI
+    name: Scale AI
+    category: ai_platform
+    priority: medium
+    note: 数据/评测/企业 AI
+
+  - handle: NVIDIAAI
+    name: NVIDIA AI
+    category: ai_platform
+    priority: high
+    note: 训练/推理/硬件与生态
+
+  - handle: grok
+    name: Grok
+    category: ai_company
+    priority: medium
+    note: Grok 产品更新
+
+  # ===== AI 工具与应用（头部）=====
+  - handle: LangChainAI
+    name: LangChain
+    category: ai_tooling
+    priority: high
+    note: Agent/RAG 框架与生态
+
+  - handle: runwayml
+    name: Runway
+    category: ai_app
+    priority: medium
+    note: 生成式视频/创作工具
+
+  - handle: midjourney
+    name: Midjourney
+    category: ai_app
+    priority: medium
+    note: 生成式图像
+
+  - handle: elevenlabsio
+    name: ElevenLabs
+    category: ai_app
+    priority: medium
+    note: 语音/音频模型与产品
+
+  - handle: DeepLearningAI
+    name: DeepLearning.AI
+    category: ai_community
+    priority: medium
+    note: AI 教育与行业动态
+
+  # ===== AI 领袖（公司高管/创始人）=====
   - handle: sama
     name: Sam Altman
     category: ai_leader
     priority: high
     note: OpenAI CEO
-    
+
+  - handle: gdb
+    name: Greg Brockman
+    category: ai_leader
+    priority: high
+    note: OpenAI 联合创始人
+
   - handle: DarioAmodei
     name: Dario Amodei
     category: ai_leader
     priority: high
     note: Anthropic CEO
-    
-  - handle: demaborgs
+
+  - handle: demishassabis
     name: Demis Hassabis
     category: ai_leader
     priority: high
     note: Google DeepMind CEO
 
-  # ===== AI 研究员和技术领袖 =====
+  - handle: ClementDelangue
+    name: Clem Delangue
+    category: ai_leader
+    priority: medium
+    note: Hugging Face CEO
+
+  # ===== 研究员 / 学术领袖（AI 圈）=====
   - handle: ylecun
     name: Yann LeCun
     category: researcher
     priority: high
-    note: Meta AI 首席科学家, 图灵奖得主
-    
+    note: Meta AI 首席科学家
+
   - handle: karpathy
     name: Andrej Karpathy
     category: researcher
     priority: high
-    note: 前 Tesla AI 总监, 前 OpenAI
-    
-  - handle: gaborgs
-    name: Greg Brockman
-    category: ai_leader
-    priority: high
-    note: OpenAI 联合创始人/前总裁
+    note: 研究/工程与观点输出
 
-  # ===== 其他科技领袖 =====
-  - handle: satloghubev
-    name: Satya Nadella
-    category: tech_leader
-    priority: medium
-    note: Microsoft CEO
-
-  # ===== AI / 大模型 / Infra 扩展 =====
-  - handle: IlyaSutskever
+  - handle: ilyasut
     name: Ilya Sutskever
     category: researcher
-    priority: medium
-    note: OpenAI 联合创始人, 代表性 AI 研究员
+    priority: high
+    note: 代表性研究员
 
-  - handle: _rockt
-    name: Wojciech Zaremba
+  - handle: geoffreyhinton
+    name: Geoffrey Hinton
     category: researcher
-    priority: medium
-    note: OpenAI 联合创始人, 强化学习/机器人
+    priority: high
+    note: 深度学习奠基者
 
-  - handle: guangxuanwang
-    name: Guangxuan Wang
-    category: developer
-    priority: medium
-    note: AI infra/优化方向开发者
-
-  - handle: BingshenYin
-    name: Bingshen Yin
-    category: developer
-    priority: medium
-    note: AI infra/推理优化
+  - handle: drfeifei
+    name: Fei-Fei Li
+    category: researcher
+    priority: high
+    note: 计算机视觉/空间智能
 
   - handle: AndrewYNg
     name: Andrew Ng
     category: researcher
     priority: medium
-    note: AI 教学和产业化
+    note: AI 教学与产业化
 
   - handle: emollick
     name: Ethan Mollick
     category: researcher
     priority: medium
-    note: 研究 AI 对工作与教育的影响
+    note: AI 对社会与工作的影响
 
-  # ===== 宏观 / 投资 / 商业 =====
-  - handle: Naval
-    name: Naval Ravikant
-    category: investor
-    priority: medium
-    note: 投资人, 哲学/创业/财富思考
-
-  - handle: morganhousel
-    name: Morgan Housel
-    category: investor
-    priority: medium
-    note: 《金钱心理学》作者, 财经/行为金融
-
-  - handle: howardlindzon
-    name: Howard Lindzon
-    category: investor
-    priority: medium
-    note: 早期投资人, 市场情绪与趋势
-
-  - handle: JoshWolfe
-    name: Josh Wolfe
-    category: investor
-    priority: medium
-    note: Lux Capital 合伙人, 深科创业与投资
-
-  - handle: PatrickMcGee_
-    name: Patrick McGee
-    category: tech_leader
-    priority: medium
-    note: FT 记者, 苹果/科技商业
-
-  # ===== 科技媒体 / 全球新闻视角 =====
-  - handle: Stratechery
-    name: Ben Thompson
-    category: tech_leader
-    priority: medium
-    note: 科技战略分析, 苹果/微软/AI/互联网格局
-
-  - handle: asonyan
-    name: Azeem Azhar
-    category: tech_leader
-    priority: medium
-    note: 指数科技, 政治经济与技术交叉
-
-  - handle: zerohedge
-    name: zerohedge
-    category: investor
-    priority: medium
-    note: 宏观与市场, 偶有极端观点, 把握情绪
-
-  - handle: RnaudBertrand
-    name: Renaud Bertrand
-    category: geopolitics
-    priority: medium
-    note: 地缘政治与中国/西方舆论观察
-
-  - handle: ianbremmer
-    name: Ian Bremmer
-    category: geopolitics
-    priority: medium
-    note: 政治风险, 全球局势
-
-  # ===== 科学 / 未来 / 太空 =====
-  - handle: waitbutwhy
-    name: Wait But Why
+  - handle: woj_zaremba
+    name: Wojciech Zaremba
     category: researcher
     priority: medium
-    note: 长文作者, 写未来科技/人生/思维模式
-
-  - handle: neuromusic
-    name: Chris Olah
-    category: researcher
-    priority: medium
-    note: 可解释性研究, 深度学习安全
-
-  - handle: AstroKatie
-    name: Katie Mack
-    category: researcher
-    priority: medium
-    note: 宇宙学, 科学传播
-
-  - handle: NaturePortfolio
-    name: Nature
-    category: researcher
-    priority: medium
-    note: 自然杂志, 前沿科学新闻
-
-  # ===== 产品 / 创作者 / 思维 & 效率 =====
-  - handle: Julian
-    name: Julian Shapiro
-    category: developer
-    priority: medium
-    note: 增长/写作/思考框架
-
-  - handle: shreyas
-    name: Shreyas Doshi
-    category: developer
-    priority: medium
-    note: 前 Stripe/Twitter 产品负责人, 产品与决策
-
-  - handle: stephsmithio
-    name: Steph Smith
-    category: developer
-    priority: medium
-    note: 远程工作/内容创作者/增长
-
-  - handle: AlexHormozi
-    name: Alex Hormozi
-    category: entrepreneur
-    priority: medium
-    note: 商业执行/成交与增长, 偏实战风格
-
-  # ===== 偏中国/亚洲视角（英文为主） =====
-  - handle: zhanglifan
-    name: Lifan Zhang
-    category: geopolitics
-    priority: medium
-    note: 中美科技与政策观察
-
-  - handle: zhihuishu
-    name: Zhiwu Chen
-    category: investor
-    priority: medium
-    note: 经济学视角, 中国与全球经济
-
-  - handle: tgmacro
-    name: TG Macro
-    category: investor
-    priority: medium
-    note: 对宏观与中国有较多关注
-
-  # 添加更多用户...
-  # - handle: username
-  #   name: Display Name
-  #   category: ai_leader / tech_leader / researcher / investor
-  #   priority: high / medium / low
-  #   note: 备注说明
+    note: 强化学习/机器人
 
 # 分类说明
 categories:
-  tech_leader: 科技公司领导
-  ai_leader: AI 公司/研究领导
-  researcher: AI 研究员
-  investor: 投资人
-  developer: 开发者
+  ai_company: AI 公司官方/产品账号
+  ai_lab: AI 研究机构/实验室官方账号
+  ai_platform: AI 平台/基础设施/生态
+  ai_tooling: AI 开发者工具/框架
+  ai_app: AI 应用与创作工具
+  ai_community: AI 社区/教育与行业动态
+  ai_leader: AI 公司高管/创始人
+  researcher: AI 研究员/学术领袖
