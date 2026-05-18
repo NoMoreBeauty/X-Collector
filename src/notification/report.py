@@ -34,10 +34,8 @@ REPORT_TEMPLATE = """# X 动态采集报告
 > 
 > {{ tweet.content }}
 > 
-> ❤️ {{ tweet.likes }} | 🔄 {{ tweet.retweets }} | 💬 {{ tweet.replies }}
-{% if tweet.media_description %}
-> 📷 *{{ tweet.media_description }}*
-{% endif %}
+> ❤️ {{ tweet.likes }} | 🔄 {{ tweet.retweets }} | 💬 {{ tweet.replies }}{% if tweet.media_urls %}
+> 🖼️ *[媒体内容]* {{ tweet.media_urls }}{% endif %}
 
 {% endfor %}
 ---

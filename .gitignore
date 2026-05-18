@@ -30,4 +30,5 @@ Thumbs.db
 
 order-S9D44RSGD158.txt
 
-.env.example
+# Email template debug preview (local only)
+email_preview.html

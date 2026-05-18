@@ -85,6 +85,10 @@ class Collector:
                 console.print("[yellow]⚠️ 没有找到要采集的用户[/yellow]")
                 return CollectionRun(status="no_users")
             
+            # 按优先级排序：high > medium > low，确保高优先级用户先采集
+            PRIORITY_ORDER = {"high": 0, "medium": 1, "low": 2}
+            users = sorted(users, key=lambda u: PRIORITY_ORDER.get(u.get("priority", "medium"), 1))
+            
             console.print(f"[cyan]📋 准备采集 {len(users)} 个用户 (API 模式)...[/cyan]")
             
             # 开始采集记录
@@ -175,7 +179,7 @@ class Collector:
         finally:
             await self._cleanup()
     
-    async def generate_report(self, with_summary: bool = True) -> str:
+    async def generate_report(self, with_summary: bool = True) -> tuple[str, str]:
         """
         生成今日报告
         
@@ -193,7 +197,7 @@ class Collector:
             
             if not tweets:
                 console.print("[yellow]⚠️ 今日没有采集到推文[/yellow]")
-                return ""
+                return "", ""
             
             console.print(f"[cyan]📝 生成报告，包含 {len(tweets)} 条推文...[/cyan]")
             
@@ -201,9 +205,19 @@ class Collector:
             summary = ""
             if with_summary and self._llm and tweets:
                 console.print("[cyan]🤖 AI 正在生成摘要...[/cyan]")
-                # 限制数量避免超出 token 限制 (用户要求最多50条)
-                # 简单按采集时间排序 (数据库默认 DESC)
-                limited_tweets = tweets[:50]
+                
+                # 预筛选：过滤纯转发（无原创内容的 RT），减少噪声
+                original_tweets = [t for t in tweets if not t.is_retweet]
+                console.print(f"[dim]   原创推文 {len(original_tweets)} 条（过滤了 {len(tweets) - len(original_tweets)} 条转发）[/dim]")
+                
+                # 按互动量综合得分排序（点赞+转发*2+浏览/1000），优先呈现高质量内容
+                def engagement_score(t):
+                    return t.likes + t.retweets * 2 + t.views // 1000
+                
+                sorted_tweets = sorted(original_tweets, key=engagement_score, reverse=True)
+                
+                # 限制数量避免超出 token 限制，取互动量最高的 50 条
+                limited_tweets = sorted_tweets[:50]
                 
                 tweet_data_list = [
                     AiTweetData(
@@ -227,13 +241,14 @@ class Collector:
             
             console.print(f"[green]✅ 报告已保存: {report_path}[/green]")
             
-            return report_path
+            # 返回 (报告路径, 摘要文本)，供 send_notification 直接使用，避免重复调用 LLM
+            return report_path, summary
             
         finally:
             await self._cleanup()
     
-    async def send_notification(self, report_path: str) -> bool:
-        """发送邮件通知"""
+    async def send_notification(self, report_path: str, summary: str = "") -> bool:
+        """发送邮件通知（summary 由 generate_report 传入，避免重复调用 LLM）"""
         if not self.config.email_enabled:
             console.print("[yellow]⚠️ 邮件通知未启用[/yellow]")
             return False
@@ -244,10 +259,13 @@ class Collector:
             tweets = await self._db.get_today_tweets()
             users = load_subscriptions()
             
-            # 生成摘要
-            summary = "暂无摘要"
-            if self._llm and tweets:
-                # 限制数量避免超出 token 限制，优先取最新的
+            # 如果外部没有传入摘要（单独调用场景），才自己生成
+            if not summary and self._llm and tweets:
+                console.print("[cyan]🤖 AI 正在生成摘要（单独通知模式）...[/cyan]")
+                original_tweets = [t for t in tweets if not t.is_retweet]
+                def engagement_score(t):
+                    return t.likes + t.retweets * 2 + t.views // 1000
+                sorted_tweets = sorted(original_tweets, key=engagement_score, reverse=True)
                 tweet_data_list = [
                     AiTweetData(
                         user_handle=t.user_handle,
@@ -260,9 +278,12 @@ class Collector:
                         views=t.views,
                         media_urls=t.media_urls.split(",") if t.media_urls else []
                     )
-                    for t in tweets[:50]  # 增加限制到50
+                    for t in sorted_tweets[:50]
                 ]
                 summary = await self._llm.summarize_tweets(tweet_data_list)
+            
+            if not summary:
+                summary = "暂无摘要"
             
             # 发送邮件
             email_cfg = self.config.email_config
@@ -307,9 +328,9 @@ async def run_full_pipeline(user_handles: Optional[list[str]] = None):
     # 采集
     await collector.collect(user_handles)
     
-    # 生成报告
-    report_path = await collector.generate_report()
+    # 生成报告（同时返回摘要，避免后续重复调用 LLM）
+    report_path, summary = await collector.generate_report()
     
-    # 发送通知
+    # 发送通知，直接传入已生成的摘要
     if report_path:
-        await collector.send_notification(report_path)
+        await collector.send_notification(report_path, summary=summary)
