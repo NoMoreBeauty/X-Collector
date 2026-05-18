@@ -83,13 +83,13 @@ def collect(
         console.print(f"  ❌ 失败: {result.error_count}")
         console.print(f"  📝 新推文: {result.tweets_count}")
         
-        # 生成报告
+        # 生成报告（同时拿到 summary，避免后续重复调用 LLM）
         if report:
-            report_path = await collector.generate_report()
+            report_path, summary = await collector.generate_report()
             
             # 发送通知
             if notify and report_path:
-                await collector.send_notification(report_path)
+                await collector.send_notification(report_path, summary=summary)
     
     asyncio.run(run())
 
@@ -108,7 +108,7 @@ def report(
     
     async def run():
         collector = Collector()
-        report_path = await collector.generate_report(with_summary=summary)
+        report_path, _ = await collector.generate_report(with_summary=summary)
         if report_path:
             console.print(f"\n[green]📄 报告已生成: {report_path}[/green]")
     
